@@ -25,6 +25,7 @@ class WebDocumentLoading(DocumentLoadingBase):
             SourceDocument(
                 content=document.page_content,
                 source=document.metadata["source"],
+                title=document.metadata["title"],
             )
             for document in documents
         ]

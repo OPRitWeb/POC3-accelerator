@@ -51,6 +51,13 @@ export const Answer = ({
                 citationFilename = `${citation.filepath} - Part ${parseInt(citation.chunk_id) + 1}`;
             }
         }
+        else if (citation.url){
+            if (citation.title) {
+                citationFilename = `Citation ${index}: ` + citation.title;
+            } else {
+                citationFilename = `Citation ${index}: ` + citation.url;
+            }
+        }
         else {
             citationFilename = `Citation ${index}`;
         }

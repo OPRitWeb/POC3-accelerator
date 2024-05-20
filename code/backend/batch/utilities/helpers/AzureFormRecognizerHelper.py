@@ -83,6 +83,7 @@ class AzureFormRecognizerClient:
             # (if using layout) mark all the positions of headers
             roles_start = {}
             roles_end = {}
+            title=None
             for paragraph in form_recognizer_results.paragraphs:
                 # if paragraph.role!=None:
                 para_start = paragraph.spans[0].offset
@@ -93,6 +94,8 @@ class AzureFormRecognizerClient:
                 roles_end[para_end] = (
                     paragraph.role if paragraph.role is not None else "paragraph"
                 )
+                if paragraph.role == "title" and title is None:
+                    title = paragraph.content
 
             for page_num, page in enumerate(form_recognizer_results.pages):
                 tables_on_page = [
@@ -142,6 +145,6 @@ class AzureFormRecognizerClient:
                 )
                 offset += len(page_text)
 
-            return page_map
+            return page_map, title
         except Exception as e:
             raise ValueError(f"Error: {traceback.format_exc()}. Error: {e}")

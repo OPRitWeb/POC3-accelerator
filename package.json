@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "frontend": "file:code/frontend",
+    "ui": "file:tests/integration/ui"
+  }
+}
